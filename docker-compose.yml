@@ -1,0 +1,28 @@
+version:  '3'
+
+services:
+
+  marvelweb:
+    build: 
+     context: ./../marvelworldweb/marvelworld-web
+     dockerfile: Dockerfile
+    ports: 
+      - "8080:80"
+    environment:
+      - REACT_APP_API_URL=http://marvelbackend
+      
+    depends_on:
+        - marvelbackend
+
+  marvelbackend:
+    build: 
+      context: ./../marvelworldapi/marvelworld
+      dockerfile: MarvelWorld.Api/Dockerfile
+    ports: 
+      - "9001:80" 
+
+
+
+  
+
+
