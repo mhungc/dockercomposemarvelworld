@@ -6,18 +6,24 @@ services:
     build: 
      context: ./../marvelworldweb/marvelworld-web
      dockerfile: Dockerfile
+     args:
+      - ARG_REACT_APP_MARVEL=http://localhost:9001
     ports: 
       - "8080:80"
     environment:
-      - REACT_APP_API_URL=http://marvelbackend
+      - REACT_APP_API_URL=81
       
     depends_on:
-        - marvelbackend
+      - marvelbackend
+      
+    links:
+      - marvelbackend
 
   marvelbackend:
     build: 
       context: ./../marvelworldapi/marvelworld
       dockerfile: MarvelWorld.Api/Dockerfile
+    container_name: marvelbackend
     ports: 
       - "9001:80" 
 
